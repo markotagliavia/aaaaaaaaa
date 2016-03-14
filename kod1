@@ -1,0 +1,204 @@
+#include "matrixFunctions.h"
+#include <vector>
+#include <algorithm>
+
+	int* initMatrix1D(int n, int m)
+	{
+		int elements = n*m;
+		int* matrix = new int[elements];
+		int line;
+
+		for (int i = 0; i < elements; ++i)   
+			{	
+				cout<<"Unesite sledeci element:"<<endl;
+				cin>>line;
+				matrix[i] = line;
+			 }
+		return matrix;
+	}
+
+
+	void printMatrix1D(int *matrix, int n, int m)
+	{
+		for (int i = 0; i < n; ++i)   
+		 {
+			for ( int j = 0; j < m; ++j) 
+				{	
+					cout<<matrix[m*i+j]<<" "; 
+				}
+			cout<<endl;
+		  }
+	}
+	
+	
+	void sortMatrix1D(int *matrix, int n, int m)
+	{
+		for(int i=0; i<n*m; i++)
+			for(int j = i; j<n*m; j++)
+			{
+				if(matrix[j] < matrix[i])
+				{
+					int temp = matrix[i];
+					matrix[i] = matrix[j];
+					matrix[j] = temp;
+				}
+			}
+		printMatrix1D(matrix , n , m); 
+
+	}
+
+
+	int** initMatrix2D(int n,int m)
+	{
+		int **matrix = new int*[n];
+		for(int i = 0; i<m; i++)
+		{
+			matrix[i] = new int[m];
+		}
+
+			for(int i = 0; i< n; ++i)
+			{
+				for(int j = 0; j<m; ++j)
+				{
+					cout<<"Unesite sledeci element matrice: ";
+					cin>>matrix[i][j];
+				}
+			}
+		return matrix;
+	}
+
+
+
+	void printMatrix2D(int **matrix,int n,int m)
+	{
+		for(int i = 0; i<n; i++)
+		{
+			for(int j = 0; j<m; j++)
+			{
+				cout<<matrix[i][j]<<" ";
+			}
+			cout<<endl;
+		}
+
+	}
+	 
+	void sortMatrix2D(int **matrix,int n,int m)
+	{
+		vector<int> brojevi;
+		for(int i = 0; i<n; i++)
+			for(int j = 0; j<m; j++)
+			{
+				brojevi.push_back(matrix[i][j]);
+			}
+
+		sort(brojevi.begin(), brojevi.end());
+
+		for(int i = 0; i<n; i++)
+			for(int j = 0; j<m; j++)
+			{
+				matrix[i][j]=brojevi[i*m+j];
+			}
+		printMatrix2D(matrix , n , m); 
+	
+	}
+
+	vector<vector<int>> initMatrixVector(int n, int m)
+	{
+		vector<int> matrix;
+		vector<vector<int>> return_value;
+		int line;
+
+		for(int i = 0; i<n; i++)
+		{
+			for (int j = 0; j < m; ++j)   
+			{	
+				cout<<"Unesite sledeci element:";
+				cin>>line;
+				matrix.push_back(line);
+			 }
+			return_value.push_back(matrix);
+		}
+		return return_value;
+	}
+
+
+
+	void printMatrixVector(vector<vector<int>> matrix,int n,int m)
+	{
+
+		for(int i = 0; i<n; i++)
+		{	for(int j = 0; j<m; j++)
+			{
+				cout<<matrix[i][i*m+j]<<" ";
+			}
+			cout<<endl;
+		}
+	}
+
+
+	bool f(int a, int b){return a>b;}
+
+	void sortMatrixVector(vector<vector<int>> matrix,int n,int m,  int choice)
+	{
+		vector<int> for_sorting;
+
+		for(int i = 0; i<n ; i++)
+		{
+			for(int j = 0; j<m; j++)
+			{
+				for_sorting.push_back(matrix[i][i*m+j]);
+			}
+		}
+
+		if(choice == 1) sort(for_sorting.begin(),for_sorting.end());
+		else sort(for_sorting.begin(),for_sorting.end(), f);
+
+		for(int i = 0; i<n ; i++)
+		{
+			for(int j = 0; j<m; j++)
+			{
+				matrix[i][i*m+j] = for_sorting[i*m+j];
+			}
+		}
+
+		printMatrixVector(matrix,n,m);
+	}
+
+	/*void swap(int &a, int &b)
+	{
+		 int temp = a;
+		 a = b;
+		b = temp;	
+	}
+
+		void rotate(int n, int m)
+		{
+			if(n==m)
+			{
+				vector<vector<int>> matrix = initMatrixVector(n,m);
+				
+				for(int r = 0; r < n; r++) {
+					for(int c = r; c < n; c++) {  
+						swap(matrix[r][c], matrix[c][r]);
+													}
+												}
+
+				for(int r = 0; r < n; r++) {
+					 for(int c =0; c < n/2; c++) {
+						 swap(matrix[r][c], matrix[r][n-c-1]);
+											}
+												}
+
+
+						printMatrixVector(matrix,n,m);
+			}
+			else
+				cout<<"Matrica mora biti kvadratna!"<<endl;
+		
+		}*/
+
+
+
+
+
+	
